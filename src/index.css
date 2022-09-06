@@ -72,10 +72,27 @@ body {
   border-radius: 0.5rem;
   font-size: 20px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: bold;
   background-color: white;
 }
 
 .section__inputs>button:hover {
   background-color: lightgray;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon>h3 {
+  font-size: 18px;
+  font-weight: 200;
+  text-transform: capitalize;
+}
+
+.temperature>h1 {
+  font-size: 60px;
 }
