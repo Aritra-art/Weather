@@ -1,6 +1,17 @@
 import { FaArrowDown } from "react-icons/fa";
 import "./Description.css";
+import { useEffect } from "react";
+import { constructWeatherUrl } from "../WeatherServices";
 const Descriptions = () => {
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      const data = await constructWeatherUrl("Kanchrapara");
+      console.log(data);
+    };
+
+    fetchWeatherData();
+  }, []);
+
   return (
     <div className="section section__descriptions">
       <div className="card">
