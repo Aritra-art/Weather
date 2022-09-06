@@ -9,7 +9,10 @@ const constructWeatherUrl = async (city, units = "metric") => {
 
   const data = await fetch(URL)
     .then((response) => response.json())
-    .then((data) => data);
+    .then((data) => data)
+    .catch((error) => {
+      alert("error occured, please try again later");
+    });
   const {
     weather,
     main: { feels_like, humidity, pressure, temp, temp_max, temp_min },
