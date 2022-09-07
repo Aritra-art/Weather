@@ -8,18 +8,30 @@ function App() {
   const [city, setCity] = useState("Kanchrapara");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
+  const [bg, setBg] = useState(hotBg);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       const data = await constructWeatherUrl(city, units);
       setWeather(data);
+      let threshold = 0;
+      if (units === "metric") {
+        threshold = 20;
+      } else {
+        threshold = 60;
+      }
+      if (data.temp <= threshold) {
+        setBg(coldBg);
+      } else {
+        setBg(hotBg);
+      }
     };
 
     fetchWeatherData();
   }, [units, city]);
 
   return (
-    <div className="app" style={{ backgroundImage: `url(${coldBg})` }}>
+    <div className="app" style={{ backgroundImage: `url(${bg})` }}>
       <div className="overlay">
         {weather && (
           <div className="container">
@@ -28,7 +40,8 @@ function App() {
                 type="text"
                 name="city"
                 onKeyDown={(e) => {
-                  if (e.keyCode === 13) {
+                  if (e.key === "Enter") {
+                    e.target.blur();
                     setCity(e.target.value);
                   }
                 }}
